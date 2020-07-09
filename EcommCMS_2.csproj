@@ -1,0 +1,341 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="App_Data\**" />
+    <Content Remove="App_Data\**" />
+    <EmbeddedResource Remove="App_Data\**" />
+    <None Remove="App_Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200503213844_AddingIdentity.cs" />
+    <Compile Remove="Migrations\20200503213844_AddingIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200503223043_AddingIdentity2.cs" />
+    <Compile Remove="Migrations\20200503223043_AddingIdentity2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+    <Content Remove="Areas\Admin\Views\Categories\AddCategory - Copy.cshtml" />
+    <Content Remove="Areas\Admin\Views\Categories\Index - Copy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\AccountController.de-DE.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\AccountController-en-US.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\AccountController.de-DE.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dropzone" Version="4.3.0" />
+    <PackageReference Include="Fancybox" Version="2.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
+    <PackageReference Include="ReflectionIT.Mvc.Paging" Version="4.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-rc0001" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\NewFolder\" />
+    <Folder Include="wwwroot\Images\Uploads\Products\32\Gallery\Thumbs\" />
+    <Folder Include="wwwroot\Images\Uploads\Products\32\Thumbs\" />
+    <Folder Include="wwwroot\Images\Uploads\Products\33\Gallery\Thumbs\" />
+    <Folder Include="wwwroot\Images\Uploads\Products\35\Gallery\Thumbs\" />
+    <Folder Include="wwwroot\Images\Uploads\Products\36\Gallery\Thumbs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\ckeditor\adapters\jquery.js" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor.asp" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor.pack" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor.php" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor_basic.js" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor_basic_source.js" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor_php4.php" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor_php5.php" />
+    <None Include="wwwroot\lib\ckeditor\ckeditor_source.js" />
+    <None Include="wwwroot\lib\ckeditor\config.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\af.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ar.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\bg.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\bn.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\bs.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ca.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\cs.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\cy.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\da.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\de.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\el.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\en-au.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\en-ca.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\en-gb.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\en.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\eo.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\es.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\et.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\eu.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\fa.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\fi.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\fo.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\fr-ca.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\fr.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\gl.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\gu.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\he.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\hi.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\hr.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\hu.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\id.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\is.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\it.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ja.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ka.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\km.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ko.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\lt.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\lv.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\mk.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\mn.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ms.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\nb.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\nl.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\no.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\pl.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\pt-br.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\pt.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ro.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ru.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\sk.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\sl.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\sr-latn.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\sr.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\sv.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\th.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\tr.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\ug.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\uk.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\vi.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\zh-cn.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\zh.js" />
+    <None Include="wwwroot\lib\ckeditor\lang\_languages.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\cs.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\cy.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\da.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\de.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\el.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\en.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\eo.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\fa.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\fi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\fr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\gu.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\he.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\it.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\mk.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\nb.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\nl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\no.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\pt-br.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\ro.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\tr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\ug.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\vi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\a11yhelp\lang\zh-cn.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\about\dialogs\about.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\adobeair\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\ajax\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\autogrow\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\bbcode\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\bg.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\cs.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\cy.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\da.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\de.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\el.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\en.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\eo.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\et.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\fa.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\fi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\fr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\gu.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\he.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\hr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\it.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\nb.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\nl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\no.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\pl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\pt-br.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\tr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\ug.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\uk.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\vi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\lang\zh-cn.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\devtools\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\div\dialogs\div.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\docprops\dialogs\docprops.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\docprops\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\filebrowser\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\find\dialogs\find.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\flash\dialogs\flash.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\button.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\form.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\radio.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\select.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\iframedialog\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\image\dialogs\image.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\link\dialogs\anchor.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\link\dialogs\link.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\pastefromword\filter\default.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\pastetext\dialogs\pastetext.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\dialogs\placeholder.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\bg.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\cs.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\cy.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\da.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\de.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\el.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\en.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\eo.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\et.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\fa.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\fi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\fr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\he.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\hr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\it.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\nb.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\nl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\no.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\pl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\pt-br.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\tr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\ug.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\uk.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\vi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\lang\zh-cn.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\placeholder\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\scayt\dialogs\options.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\cs.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\cy.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\de.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\el.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\en.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\eo.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\et.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\fa.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\fi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\fr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\he.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\hr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\it.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\nb.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\nl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\no.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\pt-br.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\tr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\ug.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\specialchar\lang\zh-cn.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\stylesheetparser\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\styles\styles\default.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\tableresize\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\table\dialogs\table.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\templates\dialogs\templates.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\templates\templates\default.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\bg.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\cs.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\cy.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\da.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\de.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\el.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\en.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\eo.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\et.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\fa.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\fi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\fr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\he.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\hr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\it.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\mk.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\nb.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\nl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\no.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\pl.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\pt-br.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\tr.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\ug.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\uk.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\vi.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\lang\zh-cn.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\uicolor\yui\yui.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <None Include="wwwroot\lib\ckeditor\plugins\xml\plugin.js" />
+    <None Include="wwwroot\lib\ckeditor\skins\kama\skin.js" />
+    <None Include="wwwroot\lib\ckeditor\skins\office2003\skin.js" />
+    <None Include="wwwroot\lib\ckeditor\skins\v2\skin.js" />
+    <None Include="wwwroot\lib\ckeditor\themes\default\theme.js" />
+    <None Include="wwwroot\lib\dropzone\dropzone-amd-module.js" />
+    <None Include="wwwroot\lib\dropzone\dropzone-amd-module.min.js" />
+    <None Include="wwwroot\lib\dropzone\dropzone.js" />
+    <None Include="wwwroot\lib\dropzone\dropzone.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Controllers\AccountController-en-US.resx" />
+    <Resource Include="Resources\Controllers\AccountController.de-DE.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Images\Uploads\Products\32\Thumbs\download.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Images\Uploads\Products\33\Thumbs\download.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Images\Uploads\Products\37\Thumbs\download.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Images\Uploads\Products\38\Thumbs\download.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Images\Uploads\Products\39\Thumbs\download.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

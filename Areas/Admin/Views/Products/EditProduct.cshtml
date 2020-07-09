@@ -1,0 +1,163 @@
+﻿@model EcommCMS.Models.ViewModels.Products.ProductVM
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h1>Edit Product</h1>
+
+<h4>Product</h4>
+<style>
+    input#ImageName {
+        display: none;
+    }
+</style>
+@if (ViewData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @ViewData["msg"].ToString()
+    </div>
+}
+<hr />
+<div class="row">
+        <form asp-action="EditProduct" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger col-md-12"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slug" class="control-label"></label>
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label"></label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Category</label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CategoryId, Model.Categories, new { @class = "form-control" });
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Image Name</label>
+                <input asp-for="ImageName" class="form-control" />
+                <div class="col-md-10">
+                    <img src="/Images/Uploads/Products/@Model.Id/Thumbs/@Model.ImageName" />
+                    <br /><br />
+                    <img id="imgpreview" src="#" />
+                    <br /><br />
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="ImageUpload" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+</div>
+<hr />
+@if (!Model.GalleryImages.Any())
+{
+    <h3>There are no images for this product.</h3>
+}
+<form action="/admin/Products/saveGalleryImages" method="post"
+      enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple />
+        <input type="submit" value="Upload" />
+    </div>
+</form>
+<br />
+<br />
+<div class="row">
+    @foreach (var image in Model.GalleryImages)
+    {
+        <div stype="display:inline-block;margin-right:15px;">
+            <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@image" />
+            @Html.ActionLink("Delete", "DeleteImage", "Products", new { @class = "deleteImage", data_name = image })
+        </div>
+    }
+</div>
+<link href="~/lib/dropzone/basic.css" rel="stylesheet" />
+<link href="~/lib/dropzone/dropzone.css" rel="stylesheet" />
+
+@section Scripts {
+    <script src="~/lib/dropzone/dropzone.js"></script>
+    <script>
+        $(function () {
+            /*
+            * Preview selected image
+            */
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("img#imgpreview")
+                            .attr("src", e.target.result)
+                            .width(50)
+                            .height(50);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#ImageUpload").change(function () {
+                readURL(this);
+            });
+
+    //////////////////////////////////////////////////////////////
+             /*
+    * Dropzone js
+    */
+
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "image/*",
+        init: function() {
+            this.on("complete", function (file) {
+                if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                    location.reload();
+                }
+            });
+
+            this.on("sending", function (file, xhr, formData) {
+                formData.append("id", @Model.Id);
+            });
+        }
+    };
+
+    //////////////////////////////////////////////////////////////
+    $("a.deleteimage").click(function (e) {
+        e.preventDefault();
+
+        if (!confirm("Confirm deletion")) return false;
+
+        var $this = $(this);
+        var url = "/admin/Products/DeleteImage";
+        var imageName = $this.data("name");
+
+        $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {
+            $this.parent().fadeOut("fast");
+        });
+
+    });
+
+    //////////////////////////////////////////////////////////////
+        });
+    </script>
+}

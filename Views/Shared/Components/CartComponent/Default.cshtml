@@ -1,0 +1,7 @@
+﻿@model EcommCMS.Models.ViewModels.Cart.CartVM
+
+<div class="ajaxcart nav-link text-dark" style="color:white;">
+    Your cart: @Model.Quantity item(s) - $@Model.Price
+    <br/>
+    @Html.ActionLink("Checkout", "Index","cart")
+</div>

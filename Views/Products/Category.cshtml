@@ -1,0 +1,59 @@
+﻿@model IPagedList<EcommCMS.Models.ViewModels.Products.ProductVM>
+
+@{
+    ViewData["Title"] = "Category";
+}
+@using PagedList;
+@using PagedList.Core;
+
+<h4>Products</h4>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ImageName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                    @*TODO*@
+                    @*<a href="/shop/product-details/@item.Slug">
+                            <img src="/Images/Uploads/Products/@item.Id/Thumbs/@item.ImageName" />
+                        </a>*@
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "ProductDetails", new {  name=item.Slug })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<pager class="pager-container" list="@Model" asp-action="Category" asp-controller="Products" />

@@ -1,0 +1,92 @@
+﻿@model IPagedList<ProductVM>
+@using  EcommCMS.Models.ViewModels.Products;
+@{
+    ViewData["Title"] = "Products";
+}
+@using PagedList;
+@using PagedList.Core;
+<h1>Products</h1>
+<select id="SelectCategory" name="SelectCategory">
+    <option value="0">All</option>
+    @foreach (var item in (SelectList)ViewData["Categories"])
+    {
+        if (ViewBag.SelectedCat == item.Value)
+        {
+            <option selected="selected" value="@item.Value">@item.Text</option>
+        }
+        else
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    }
+</select>
+<br />
+<br />
+<p>
+    <a asp-action="AddProduct">Create New Product</a>
+</p>
+<table class="table">
+   @* <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>*@
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    <a href="/admin/Products/EditProduct/@item.Id">
+                        <img src="/Images/Uploads/Products/@item.Id/Thumbs/@item.ImageName" />
+                    </a>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditProduct", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<pager class="pager-container" list="@Model" asp-action="Products"  asp-controller="Products" />
+
+@section Scripts{ 
+
+    <script>
+        $(function () {
+            /*
+             * Select Products from Specified Category
+             */
+            $("#SelectCategory").on("change", function () {
+                var url = $(this).val();
+                if (url) {
+                    window.location = "/admin/Products/Products?catId=" + url;
+                }
+                return false;
+            });
+        });
+
+    </script>
+
+}

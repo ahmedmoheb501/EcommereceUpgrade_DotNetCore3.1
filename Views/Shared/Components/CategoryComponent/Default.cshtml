@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EcommCMS.Models.ViewModels.Category.CategoryViewComponentVM>
+   
+    <nav class="navbar navbar-light bg-white border-bottom box-shadow text-center sidemenu">
+
+        <ul class="navbar-nav flex-grow-1">
+            <li><a class="navbar-brand menu-item-rounded">Categories</a></li>
+            @{ foreach (var category in Model)
+                {
+                    var url = "/Products/Category/" + @category.Slug.ToLower();
+                    <li class="nav-item"><a id="category-menu-item" class="nav-link" href="@url">@category.Name</a></li>
+                }
+            }
+        </ul>
+    </nav>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var href = window.location.href;
+            $('nav.sidemenu a').each(function (e, i) {
+                if (href.indexOf($(this).attr('href')) >= 0) {
+                    $(this).addClass('active menu-item-rounded wheat');
+                }
+            });
+        });
+        //2
+        function selectCategory(cat) {
+            debugger;
+            $.ajax({
+                data: { cat: cat },
+                type: 'POST',
+                url: "/Products/Category"
+            });
+        }
+    </script>

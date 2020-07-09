@@ -1,0 +1,31 @@
+            	1- Init CartVM list
+
+                2- Get the product
+                
+                3 Check if the product is already in cart
+                
+		 If it is, increment
+
+                 If not, add new item to cart list
+
+            4 Get total qty and price and add to model
+
+            5 Save cart to session
+
+            6 Return ViewComponent
+
+
+		
+Pages Menu
+1-Creat Action 
+2- Creat a view with this code:
+		@Html.Raw(Model.Body);
+You will face problems, then do what you can until next meeting Juni 3rd 21Uhr abend  
+
+  Remaining in the project : Orders, Checkout, paypalpages
+
+    => Angular 8 Todo project 
+    => ReactJS Todo project
+    => Mean stack project (NodeJS + MongoDB + Any JS on client)
+
+

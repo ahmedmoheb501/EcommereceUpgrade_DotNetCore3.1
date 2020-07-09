@@ -1,0 +1,58 @@
+﻿@*@model List<EcommCMS.Models.ViewModels.Products.ProductVM>*@
+@addTagHelper *, ReflectionIT.Mvc.Pagin
+@model ReflectionIT.Mvc.Paging.PagingList<EcommCMS.Models.ViewModels.Products.ProductVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*tag nav : Show PageNumbers*@
+<nav aria-label="ProductList navigation example">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+</nav>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Slug)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slug)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*tag nav : Show PageNumbers*@
+@*<nav aria-label="ProductList navigation example">
+    <vc:pager paging-list="@Model" />
+</nav>*@
+<nav aria-label="ProductList navigation example">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+</nav>

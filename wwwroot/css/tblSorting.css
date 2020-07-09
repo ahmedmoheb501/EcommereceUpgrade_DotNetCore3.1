@@ -1,0 +1,10 @@
+/* When user selected the row for drag & drop */
+.selected {
+    background-color: #666;
+    color: #fff;
+}
+/* When user hover the rows of table curser:pointer except the first row */
+
+.sortable tr:not(:first-child):hover {
+    cursor: pointer;
+}

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EcommCMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EcommCMS</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+                    <ul class="navbar-nav">
+                        @*TODO Pages Menu Partial => view component for all pages (not admin area)*@
+                        @await Component.InvokeAsync("PageComponent")
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @*@Html.Action("UserNavPartial", "Account", new { area = "" })*@
+                            @*@await Html.PartialAsync("~/Views/Account/userNavPartial.cshtml")*@
+
+                            <li class="nav-item @(ViewData["Title"].ToString() == "User Profile" || ViewData["Title"].ToString() == "Orders" ? "active" : "")">@await Component.InvokeAsync("UserNavPartialComponent")</li>
+                            <li class="nav-item"><a class="nav-link text-dark" asp-action="logout" asp-controller="Account">Logout</a></li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item @ViewData["Title"].ToString() == 'Login' ? 'active' : ''"><a class="nav-link text-dark" asp-action="login" asp-controller="Account">Login</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex navbar-inverse">
+                    @*TODO @if (Request.IsAuthenticated && User.IsInRole("Admin"))*@
+                    <ul class="navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("Admin Area", "Index", "Products", new { area = "Admin" }, new { @class = "nav-link text-dark" }) </li>
+                    </ul>
+                    @*cart partial here*@
+                    <ul class="navbar-nav">
+                        <li class="nav-item">@await Component.InvokeAsync("CartComponent")</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                @if (ViewData["Title"].ToString() != "Create Account" &&
+                 ViewData["Title"].ToString() != "Login" &&
+                 ViewData["Title"].ToString() != "User Profile" &&
+                 ViewData["Title"].ToString() != "Orders")
+                {
+                    @await Component.InvokeAsync("CategoryComponent")
+                }
+                @if (ViewData["Title"].ToString() == "User Profile")
+                {
+                    <nav class="navbar navbar-light bg-white border-bottom box-shadow text-center sidemenu">
+
+                        <ul class="navbar-nav flex-grow-1">
+                            <li><a class="navbar-brand menu-item-rounded" href="/account/Orders">My Orders</a></li>
+                        </ul>
+                    </nav>
+                }
+
+                @if (ViewData["Title"].ToString() == "Orders")
+                {
+                    <nav class="navbar navbar-light bg-white border-bottom box-shadow text-center sidemenu">
+
+                        <ul class="navbar-nav flex-grow-1">
+                            <li><a class="navbar-brand menu-item-rounded" href="/account/userprofile">User Profile</a></li>
+                        </ul>
+                    </nav>
+                }
+            </div>
+            <div class="col-md-9 mainframe">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - EcommCMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

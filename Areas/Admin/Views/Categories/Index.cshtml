@@ -1,0 +1,91 @@
+﻿@model EcommCMS.Models.ViewModels.Category.CategoryVM
+
+@{
+    ViewData["Title"] = "Categories";
+
+}
+@*Partial view for Add New Category*@
+<partial name="_CreatePartial" model="@Model" />
+@*<p>
+        <a asp-action="#">Add New Category</a>
+    </p>*@
+@if (!Model.CategoryList.Any()) //check the Model.CategoryList
+{
+    < h1 > There are no Categories.</ h1 >
+}
+else
+{
+    <table id="tblLocations" cellpadding="0" cellspacing="0" border="1" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CategoryList)  //List Of Category from Model.CategoryList
+            {
+                <tr id="page_@item.Id">
+                    <td>
+                        <input id="@item.Id" asp-for="@item.Name" class="form-control inputEdit" readonly="readonly" />
+                    </td>
+                    <td>
+                        @*Delete Category*@
+                        <a asp-controller="Categories" asp-action="DeleteCategory" asp-route-id="@item.Id" class="deleteItem" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@*Add Script for Edit Cateory *@
+@section scripts {
+    <script>
+
+        $(document).ready(function () {
+            $('.inputEdit').click(function () {
+                $(this).attr("readonly", false);
+
+            });
+
+        });
+        // Update the Name Of Category when the user press Enter key
+        $(document).ready(function () {
+            $('.inputEdit').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).attr("readonly", true);
+                    //console.log(elmId);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Categories/Index',
+                        dataType: 'json',
+                        data: { catName: $(this).val(), catId: $(this).attr("id") },
+                        success: function (result) {
+                        }
+                    });
+                }
+
+            });
+            $("#tblLocations tbody").sortable({
+                items: 'tr',
+                placeholder: 'ui-state-highlight',
+                update: function () {
+                    var ids = $(this).sortable("toArray");
+                    var url = "/Admin/Categories/ReorderCats";
+                    console.log(ids);
+                    $.ajax({
+                        data: { data: ids },
+                        type: 'POST',
+                        url: url
+                    });
+
+                }
+            });
+        }
+        );
+    </script>
+}
+
+

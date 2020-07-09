@@ -1,0 +1,26 @@
+﻿@model List<EcommCMS.Models.ViewModels.Pages.PageViewComponentVM>
+
+@{
+    for (int i = 0; i < 4; i++)
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Pages"
+               asp-action="Index"
+               asp-route-id="@Model[i].Slug">@Model[i].Name</a>
+        </li>
+    }
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown04"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown04">
+            @for(int i = 4; i < Model.Count; i++)
+            {
+                    <a class="dropdown-item" asp-controller="Pages"
+                       asp-action="Index"
+                       asp-route-id="@Model[i].Slug">@Model[i].Name</a>
+            }
+        </div>
+    </li>
+}

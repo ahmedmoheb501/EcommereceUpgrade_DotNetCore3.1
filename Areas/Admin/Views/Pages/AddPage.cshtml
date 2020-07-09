@@ -1,0 +1,56 @@
+﻿@model EcommCMS.Models.ViewModels.Pages.PageVM
+
+@{
+    ViewData["Title"] = "Add New Page";
+}
+<hr />
+<h4>Add Page details</h4>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<div class="row">
+    <div class="col-md-8 paddingleft">
+        <form asp-action="AddPage">
+            <div asp-validation-summary="ModelOnly" class="text-danger displayblock"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control inline" />
+                <span asp-validation-for="Title" class="text-danger displayblock"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slug" class="control-label"></label>
+                <input asp-for="Slug" class="form-control inline" />
+                <span asp-validation-for="Slug" class="text-danger displayblock"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Body" id="bodyLabel" class="control-label"></label>
+                @Html.TextAreaFor(model => model.Body, new { @class = "form-control" })
+                <span asp-validation-for="Body" class="text-danger displayblock"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HasSidebar" />
+                    <label class="control-label">Add to sidebar</label>
+                </label>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Add Page" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("Body");
+    </script>
+}

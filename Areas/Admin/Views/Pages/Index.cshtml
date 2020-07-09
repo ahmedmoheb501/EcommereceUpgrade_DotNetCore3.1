@@ -1,0 +1,91 @@
+﻿@model IEnumerable<EcommCMS.Models.ViewModels.Pages.PageVM>
+@{
+    ViewData["Title"] = "Pages";
+}
+
+@*Add Style for selected row for drag & drop*@
+@section Style
+{
+    <link href="~/css/tblSorting.css" rel="stylesheet" />
+}
+<h1>Pages</h1>
+
+<p>
+    <a asp-action="AddPage">Add New Page</a>
+</p>
+
+@if (!Model.Any())
+{
+    <h1>There are no pages.</h1>
+}
+else
+{
+    //Add attributes for sorting
+    <table id="tblLocations" cellpadding="0" cellspacing="0" border="1" class="table sortable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Slug)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HasSidebar)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="page_@item.Id">
+                    @*Add id Attribute for sorting*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Slug)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HasSidebar)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditPage", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "DetailsPage", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "DeletePage", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@*Add Script to Sort Table*@
+@section scripts {
+    <script>
+        $(function () {
+            $("#tblLocations").sortable({
+                items: 'tr:not(tr:first-child)',
+               // cursor: 'pointer',
+                axis: 'y',
+                dropOnEmpty: false,
+                start: function (e, ui) {
+                    ui.item.addClass("selected");
+                },
+                update: function (event, ui) {
+                    var data = $(this).sortable('serialize');
+                    //console.log(data);
+                    // POST to server using  $.ajax
+                    $.ajax({
+                        data: { data: data },
+                        type: 'POST',
+                        url: '/Pages/UpdateSort'
+                    });
+                },
+                stop: function (e, ui) {
+                    ui.item.removeClass("selected");
+                }
+            });
+        });
+    </script>
+}

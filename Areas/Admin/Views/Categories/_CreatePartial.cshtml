@@ -1,0 +1,17 @@
+﻿@model EcommCMS.Models.ViewModels.Category.CategoryVM
+<div class="row toppadding">
+    <div class="col-md-8">
+        <form asp-action="Index">
+            <h2>Add new category</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger displayblock"></div>
+            <div class="form-group">
+                <input asp-for="Name" class="form-control" required minlength="3"/>
+                <span asp-validation-for="Name" class="text-danger  displayblock"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="AddCategory" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

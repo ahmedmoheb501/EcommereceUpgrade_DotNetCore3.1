@@ -1,0 +1,74 @@
+﻿@model EcommCMS.Models.ViewModels.Account.LoginUserVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<h4>Login</h4>
+
+@if (TempData["Accountmsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Accountmsg"]
+    </div>
+}
+<div class="row">
+    <div class="col-md-8 paddingleft">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger displayblock"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" id="username" />
+                <span asp-validation-for="Username" class="text-danger displayblock"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input type="password" asp-for="Password" class="form-control" id="password" />
+                <span asp-validation-for="Password" class="text-danger displayblock"></span>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" value="lsRememberMe" id="rememberMe" /><label asp-for="RememberMe" class="control-label"></label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" onclick="lsRememberMe()" />  <a asp-action="AddAccount">Create an Account</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+@section Scripts{
+
+    <script>
+        //Remember user login
+        const rmCheck = document.getElementById("rememberMe"),
+            usernameInput = document.getElementById("username");
+            passwordInput = document.getElementById("password");
+
+        if (localStorage.checkbox && localStorage.checkbox !== "") {
+            rmCheck.setAttribute("checked", "checked");
+            usernameInput.value = localStorage.username;
+            passwordInput.value = localStorage.password;
+
+        }
+        else {
+            rmCheck.removeAttribute("checked");
+            usernameInput.value = "";
+            passwordInput.value = "";
+
+        }
+
+        function lsRememberMe() {
+            if (rmCheck.checked && usernameInput.value !== "") {
+                localStorage.username = usernameInput.value;
+                localStorage.password = passwordInput.value;
+                localStorage.checkbox = rmCheck.value;
+            }
+            else {
+                localStorage.username = "";
+                localStorage.password = "";
+                localStorage.checkbox = "";
+            }
+        }
+    </script>
+}

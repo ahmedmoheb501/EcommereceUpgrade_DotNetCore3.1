@@ -1,0 +1,40 @@
+﻿@model EcommCMS.Models.ViewModels.Category.CategoryVM
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Add Category details</h4>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<div class="row">
+    <div class="col-md-8 paddingleft">
+        <form asp-action="AddCategory">
+            <div asp-validation-summary="ModelOnly" class="text-danger displayblock"></div>         
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger  displayblock"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slug" class="control-label"></label>
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger  displayblock"></span>
+            </div>
+           
+            <div class="form-group text-center">
+                <input type="submit" value="AddCategory" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

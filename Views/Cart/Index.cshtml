@@ -1,0 +1,219 @@
+﻿@model IEnumerable<EcommCMS.Models.ViewModels.Cart.CartVM>
+
+@{
+    ViewData["Title"] = "Cart Details";
+}
+
+<h1>Cart Details</h1>
+
+@if (ViewData["msg"] != null)
+{
+    <h3>@ViewData["msg"]</h3>
+}
+else
+{
+<div class="ajaxbg"><span><img src="~/Images/ajax-loader.gif" alt="Alternate Text" /></span></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th colspan="4"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="row@(item.ProductId)">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td class="qty@(item.ProductId)">
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        <img src="~/Images/Uploads/Products/@item.ProductId/Thumbs/@item.Image" />
+                    </td>
+                    <td>
+                        <a class="incproduct" href="#" data-id="@item.ProductId">
+                            <img src="~/Images/plus.png" />
+                        </a>
+                    </td>
+                    <td>
+                        <a class="decproduct" href="#" data-id="@item.ProductId">
+                            <img src="~/Images/minus.png" />
+                        </a>
+                    </td>
+                    <td>
+                        <a class="removeProduct" href="#" data-id="@item.ProductId">
+                            Remove
+                        </a>
+                    </td>
+                    <td class="total@(item.ProductId)">
+                        $@Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="7"></td>
+                <td><b>Grand total</b></td>
+                <td class="grandtotal">
+                    $<span>@ViewData["GrandTotal"]</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="paypaldiv">
+        <form class="paypalform" action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_cart">
+            <input type="hidden" name="upload" value="1">
+            <input type="hidden" name="business" value="sb-hwpk62440232@business.example.com">
+            @{
+                int count = 1;
+                foreach (var item in Model)
+                {
+                    <input type="hidden" name="item_name_@count" value="@item.ProductName">
+                    <input type="hidden" name="amount_@count" value="@item.Price">
+                    <input type="hidden" name="quantity_@count" value="@item.Quantity">
+                    count++;
+                }
+            }
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+        </form>
+    </div>
+    <br />
+    <a href="#" class="placeorder btn btn-primary pull-right">Checkout</a>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            /*
+            //Increment product
+            */
+            $("a.incproduct").click(function (e) {
+                e.preventDefault();
+
+                var productId = $(this).data("id");
+                var url = "/cart/incProduct";
+                $.getJSON(url, { productId: productId }, function (data) {
+                    $("td.qty" + productId).html(data.qty);
+                    var price = data.qty * data.price;
+                    var priceHtml = "$" + price;
+
+                    $("td.total" + productId).html(priceHtml);
+                    var gt = parseFloat($("td.grandtotal span").text());
+                    var grandtotal = (gt + data.price);
+
+                    $("td.grandtotal span").text(grandtotal);
+                }).done(function (data) {
+
+                    var url2 = "/cart/UpdatePaypalComponent";
+                    $.get(url2, {}, function (data) {
+                        $('div.paypaldiv').html(data);
+                    });
+                });
+            });
+            ////////////////////////////////////////////////////////////////////
+            /*
+            //Decrement product
+            */
+            $("a.decproduct").click(function (e) {
+                e.preventDefault();
+                var productId = $(this).data("id");
+                var url = "/cart/decProduct";
+                $.getJSON(url, { productId: productId }, function (data) {
+
+                    $("td.qty" + productId).html(data.qty);
+                    var price = data.qty * data.price;
+                    var priceHtml = "$" + price;
+
+                    $("td.total" + productId).html(priceHtml);
+                    var gt = parseFloat($("td.grandtotal span").text());
+                    var grandtotal = (gt - data.price);
+
+                    $("td.grandtotal span").text(grandtotal);
+                    if (data.qty == 0) {
+                        $("tr.row" + productId).fadeOut();
+                    }
+                }).done(function (data) {
+                    var url2 = "/cart/updatePaypalComponent";
+
+                    $.get(url2, {}, function (data) {
+                        $('div.paypaldiv').html(data);
+                    });
+                });
+            });
+            ////////////////////////////////////////////////////////////////////
+            /*
+            //Remove product
+            */
+            $("a.removeProduct").click(function (e) {
+                e.preventDefault();
+
+                var productId = $(this).data("id");
+                var url = "/cart/RemoveProduct";
+                $.getJSON(url, { productId: productId }, function (data) {
+                    var gt = parseFloat($("td.grandtotal span").text());
+                    var grandtotal = (gt - data.total);
+
+                    $("td.grandtotal span").text(grandtotal);
+                    $("tr.row" + productId).fadeOut();
+                }).done(function (data) {
+
+                    var url2 = "/cart/UpdatePaypalComponent";
+                    $.get(url2, {}, function (data) {
+                        $('div.paypaldiv').html(data);
+                    });
+                });
+            });
+            ////////////////////////////////////////////////////////////////////
+            /*
+                * Place order
+            */
+
+            $("a.placeorder").click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                var url = "/cart/PlaceOrder";
+
+                $(".ajaxbg").show();
+
+                $.post(url, {}, function (data) {
+                    $(".ajaxbg span").text("Thank you. You will now be redirected to paypal.");
+                    setTimeout(function () {
+                        $('form input[name="submit"]').click();
+                    }, 2000);
+                });
+            });
+
+            //////////////////////////////////////////////////////////////
+        });
+
+    </script>
+
+}

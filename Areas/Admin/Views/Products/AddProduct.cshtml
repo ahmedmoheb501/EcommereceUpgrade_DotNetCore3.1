@@ -1,0 +1,89 @@
+﻿@model EcommCMS.Models.ViewModels.Products.ProductVM
+
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h1>Add new product</h1>
+
+<h4>New Product</h4>
+<hr />
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+<div class="row ">
+    <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label col-md-2"></label>
+            <input asp-for="Name" class="form-control col-md-10" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slug" class="control-label col-md-2"></label>
+            <input asp-for="Slug" class="form-control col-md-10" />
+            <span asp-validation-for="Slug" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label col-md-2"></label>
+            <input asp-for="Description" class="form-control col-md-10" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="price" class="control-label col-md-2"></label>
+            <input asp-for="price" class="form-control col-md-10" />
+            <span asp-validation-for="price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="CategoryId">Category</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Product Image</label>
+            <div class="col-md-10">
+                <input type="file" name="file" id="ImageUpload" />
+                <img id="imgpreview" src="#" />
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Products</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            /*
+            * Preview selected image
+            */
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("img#imgpreview")
+                            .attr("src", e.target.result)
+                            .width(50)
+                            .height(50);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#ImageUpload").change(function () {
+                readURL(this);
+            });
+        });
+    </script>
+}
